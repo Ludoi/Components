@@ -50,10 +50,10 @@ class LogListControl extends Control
 
 	public function handleOpen(string $log)
 	{
-		$response = $this->getHttpResponse();
+		$response = $this->getPresenter()->getHttpResponse();
 		$filename = $this->folder . $log;
 		$content = file_get_contents($filename);
-		if (strpos($log, '.html') === false) {
+		if (!str_contains($log, '.html')) {
 			$response->setContentType('text/plain', 'UTF-8');
 			echo $content;
 		} else {
