@@ -16,15 +16,9 @@ class LogListControl extends Control
 	private int $fileTimeNew;
 	private int $fileTimeMedium;
 
-	public function __construct(string $folder, int $fileSizeLarge = 5000000, int $fileSizeMedium = 1000000,
-								int $fileTimeNew = 6, int $fileTimeMedium = 24)
+	public function __construct(string $folder)
 	{
-
 		$this->folder = $folder;
-		$this->fileSizeLarge = $fileSizeLarge;
-		$this->fileSizeMedium = $fileSizeMedium;
-		$this->fileTimeNew = $fileTimeNew;
-		$this->fileTimeMedium = $fileTimeMedium;
 	}
 
 	private function getFiles(): array
@@ -43,8 +37,14 @@ class LogListControl extends Control
 		return $files;
 	}
 
-	public function render(): void
+	public function render(int $fileSizeLarge = 5000000, int $fileSizeMedium = 1000000,
+						   int $fileTimeNew = 6, int $fileTimeMedium = 24): void
 	{
+		$this->fileSizeLarge = $fileSizeLarge;
+		$this->fileSizeMedium = $fileSizeMedium;
+		$this->fileTimeNew = $fileTimeNew;
+		$this->fileTimeMedium = $fileTimeMedium;
+
 		$this->template->files = $this->getFiles();
 	}
 

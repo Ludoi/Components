@@ -16,7 +16,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    container_name: composer-$PROJECT_NAME
+    container_name: composer-components
     image: composer:2
     volumes:
       - ./:/app

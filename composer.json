@@ -12,8 +12,20 @@
       "src/"
     ]
   },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/Ludoi/utils.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/Ludoi/vocative.git"
+    }
+  ],
   "require": {
     "php": ">= 8.1",
-    "nette/application": "^3.2"
+    "nette/application": "^3.2",
+    "ludoi/utils": "^0.6",
+    "nextras/forms-rendering": "dev-master"
   }
 }
