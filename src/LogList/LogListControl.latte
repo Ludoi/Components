@@ -1,0 +1,16 @@
+{block content|strip}
+<table class="table table-sm table-responsive table-striped">
+    <thead>
+    <th>Název</th>
+    <th>Velikost</th>
+    <th>Čas změny</th>
+    </thead>
+    <tbody>
+    <tr n:foreach="$files as $file">
+        <td><a n:href="Open!, $file['name']">{$file['name']}</a></td>
+        <td class="{$file['class-size']}">{$file['size']|bytes}</td>
+        <td class="{$file['class-time']}">{$file['mtime']|date:'d.m.Y, H:i:s'}</td>
+    </tr>
+    </tbody>
+</table>
+{/block}

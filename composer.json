@@ -1,5 +1,14 @@
 {
+  "name": "ludoi/components",
+  "description": "Generic components for any nette app",
+  "authors": [
+    {
+      "name": "Ludek Bednarz",
+      "email": "ludek.bednarz@gmail.com"
+    }
+  ],
   "require": {
-    "": "<default>"
+    "php": ">= 8.1",
+    "nette/application": "^3.2"
   }
 }
