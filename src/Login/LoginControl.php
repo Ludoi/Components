@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ludoi\Components\Login;
 
+use Ludoi\Utils\Logger\Logger;
 use Ludoi\Utils\Logger\LoggerChannel;
 use Ludoi\Utils\Users\Users;
 use Nette\Application\UI\Control;
@@ -17,17 +18,22 @@ class LoginControl extends Control {
 
 	/** @var Presenter */
 	private Presenter $presenter;
-	private LoggerChannel $loggerChannel;
+	private ?LoggerChannel $loggerChannel = null;
 	private Users $users;
 
-	public function __construct(LoggerChannel $loggerChannel, Users $users)
+	public function __construct(Users $users)
 	{
-		$this->loggerChannel = $loggerChannel;
 		$this->users = $users;
 	}
 
-	public function setPresenter($presenter) {
+	public function setPresenter($presenter): void
+	{
 		$this->presenter = $presenter;
+	}
+
+	public function setLoggerChannel(LoggerChannel $loggerChannel): void
+	{
+		$this->loggerChannel = $loggerChannel;
 	}
 
 	protected function createComponentLoginForm(): Form {
@@ -56,13 +62,13 @@ class LoginControl extends Control {
 		try {
 			$this->presenter->getUser()->login($user, $values->password);
 			$this->users->updateLastLogin($user);
-			$this->loggerChannel->addInfo('Logged in', $this->getPresenter()->getUser()->id);
+			$this->loggerChannel?->addInfo('Logged in', $this->getPresenter()->getUser()->id);
 			if (isset($this->presenter->backlink)) {
 				$this->presenter->restoreRequest($this->presenter->backlink);
 				$this->presenter->redirect(':Front:Homepage:');
 			}
 		} catch (AuthenticationException $e) {
-			$this->loggerChannel->addError('Unsuccessful login', $user);
+			$this->loggerChannel?->addError('Unsuccessful login', $user);
 			$form->addError($e->getMessage());
 		}
 	}
@@ -70,5 +76,10 @@ class LoginControl extends Control {
 	public function render(): void {
 		$this->template->setFile(__DIR__ . '/LoginControl.latte');
 		$this->template->render();
+	}
+
+	function logMessage(Logger $logger): void
+	{
+		// TODO: Implement logMessage() method.
 	}
 }
