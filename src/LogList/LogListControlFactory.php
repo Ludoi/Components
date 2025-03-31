@@ -6,5 +6,5 @@ namespace Ludoi\Components\LogList;
 
 interface LogListControlFactory
 {
-	public function create(string $folder): LogListControl;
+	public function create(): LogListControl;
 }
