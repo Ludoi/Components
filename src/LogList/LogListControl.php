@@ -16,11 +16,6 @@ class LogListControl extends Control
 	private int $fileTimeNew;
 	private int $fileTimeMedium;
 
-	public function __construct(string $folder)
-	{
-		$this->folder = $folder;
-	}
-
 	private function getFiles(): array
 	{
 		$timeMedium = (new DateTime())->sub(new DateInterval("PT{$this->fileTimeMedium}H"))->getTimestamp();
@@ -37,9 +32,10 @@ class LogListControl extends Control
 		return $files;
 	}
 
-	public function render(int $fileSizeLarge = 5000000, int $fileSizeMedium = 1000000,
+	public function render(string $folder, int $fileSizeLarge = 5000000, int $fileSizeMedium = 1000000,
 						   int $fileTimeNew = 6, int $fileTimeMedium = 24): void
 	{
+		$this->folder = $folder;
 		$this->fileSizeLarge = $fileSizeLarge;
 		$this->fileSizeMedium = $fileSizeMedium;
 		$this->fileTimeNew = $fileTimeNew;
