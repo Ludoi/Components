@@ -17,7 +17,7 @@ class ForgottenPasswordControl extends Control
 	private Users $users;
 	/** @var Presenter */
 	private Presenter $presenter;
-	private $actionOnSubmit = null;
+	private ?\Closure $actionOnSubmit = null;
 
 	public function __construct(Users $users)
 	{
@@ -29,7 +29,7 @@ class ForgottenPasswordControl extends Control
 		$this->presenter = $presenter;
 	}
 
-	public function setActionOnSubmit(callable $actionOnSubmit): void
+	public function setActionOnSubmit(\Closure $actionOnSubmit): void
 	{
 		$this->actionOnSubmit = $actionOnSubmit;
 	}

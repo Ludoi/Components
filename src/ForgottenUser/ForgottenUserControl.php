@@ -16,7 +16,7 @@ use Nextras\FormsRendering\Renderers\FormLayout;
 class ForgottenUserControl extends Control
 {
 	private Presenter $presenter;
-	private $actionOnSubmit;
+	private ?\Closure $actionOnSubmit;
 
 	public function __construct(Users $users)
 	{
@@ -28,7 +28,7 @@ class ForgottenUserControl extends Control
 		$this->presenter = $presenter;
 	}
 
-	public function setActionOnSubmit(callable $actionOnSubmit): void
+	public function setActionOnSubmit(\Closure $actionOnSubmit): void
 	{
 		$this->actionOnSubmit = $actionOnSubmit;
 	}
