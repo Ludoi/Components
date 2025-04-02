@@ -7,6 +7,7 @@ namespace Ludoi\Components\LogList;
 use DateInterval;
 use Nette\Application\UI\Control;
 use Nette\Utils\DateTime;
+use Tracy\Dumper;
 
 class LogListControl extends Control
 {
@@ -15,6 +16,11 @@ class LogListControl extends Control
 	private int $fileSizeMedium;
 	private int $fileTimeNew;
 	private int $fileTimeMedium;
+
+	public function setFolder(string $folder): void
+	{
+		$this->folder = $folder;
+	}
 
 	private function getFiles(): array
 	{
@@ -32,16 +38,16 @@ class LogListControl extends Control
 		return $files;
 	}
 
-	public function render(string $folder, int $fileSizeLarge = 5000000, int $fileSizeMedium = 1000000,
+	public function render(int $fileSizeLarge = 5000000, int $fileSizeMedium = 1000000,
 						   int $fileTimeNew = 6, int $fileTimeMedium = 24): void
 	{
-		$this->folder = $folder;
 		$this->fileSizeLarge = $fileSizeLarge;
 		$this->fileSizeMedium = $fileSizeMedium;
 		$this->fileTimeNew = $fileTimeNew;
 		$this->fileTimeMedium = $fileTimeMedium;
 
 		$this->template->files = $this->getFiles();
+		$this->template->render(__DIR__ . '/LogListControl.latte');
 	}
 
 	public function handleOpen(string $log)
@@ -56,6 +62,7 @@ class LogListControl extends Control
 			$response->setContentType('text/html', 'UTF-8');
 			echo $content;
 		}
-		$this->terminate();
+		$this->getPresenter()->terminate();
 	}
+
 }
