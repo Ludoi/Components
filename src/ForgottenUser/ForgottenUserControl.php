@@ -54,7 +54,7 @@ class ForgottenUserControl extends Control
 			$values = $form->getValues();
 			$email = Strings::lower(Strings::trim($values->email));
 			if (!is_null($this->actionOnSubmit))
-				$this->actionOnSubmit($email, $this->presenter);
+				call_user_func($this->actionOnSubmit, $email);
 			$this->redirect('this');
 		} catch (AuthenticationException $e) {
 			$form->addError($e->getMessage());

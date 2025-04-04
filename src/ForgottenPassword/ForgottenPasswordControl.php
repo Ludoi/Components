@@ -60,7 +60,7 @@ class ForgottenPasswordControl extends Control
 			} else {
 				$initial = $this->users->forgottenPasswordInRow($user);
 				if (!is_null($this->actionOnSubmit))
-					$this->actionOnSubmit($user);
+					call_user_func($this->actionOnSubmit, $user);
 			}
 			$this->redirect('this');
 		} catch (AuthenticationException $e) {

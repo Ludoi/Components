@@ -7,7 +7,6 @@ namespace Ludoi\Components\LogList;
 use DateInterval;
 use Nette\Application\UI\Control;
 use Nette\Utils\DateTime;
-use Tracy\Dumper;
 
 class LogListControl extends Control
 {
